@@ -1,0 +1,40 @@
+blockquote,body,button,dd,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,hr,input,
+legend,li,ol,p,pre,td,textarea,th,ul,img{
+	margin:0;
+	padding:0;
+}
+#calendar div.monthBlock{
+	float: left;
+}
+#calendar{
+	width: 100%;
+	background-color: #447ff3;
+	padding: 15px 0 0;
+}
+#calendar>table{
+	width: 100%;
+	text-align: center;
+	color: #ffffff;
+	font-size: large;
+	font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
+}
+#calendar>table td{
+	/*js控制*/
+  	height: 44px;
+	width: 14.286%;
+}
+#calendar>table tr.week td{
+	color: #bfd9ff;
+}
+#calendar>table td.notCurMon{
+	color: #d3cfd5;
+}
+#calendar>table tbody.monBlock{
+	display: none;
+}
+#calendar>table td.today{
+	-webkit-border-radius: 100%;
+	background-color: white;
+	color: #447ff3;
+	font-weight: bold;
+}
