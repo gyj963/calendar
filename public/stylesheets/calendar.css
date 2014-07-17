@@ -19,7 +19,6 @@ legend,li,ol,p,pre,td,textarea,th,ul,img{
 	font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
 }
 #calendar>table td{
-	/*js控制*/
   	height: 44px;
 	width: 14.286%;
 }
@@ -33,7 +32,7 @@ legend,li,ol,p,pre,td,textarea,th,ul,img{
 	display: none;
 }
 #calendar>table td.today{
-	-webkit-border-radius: 100%;
+	-webkit-border-radius: 30%;
 	background-color: white;
 	color: #447ff3;
 	font-weight: bold;
