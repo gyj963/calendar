@@ -24,6 +24,7 @@ legend,li,ol,p,pre,td,textarea,th,ul,img{
 }
 #calendar>table tr.week td{
 	color: #bfd9ff;
+	border-bottom: 1px solid lightgrey;
 }
 #calendar>table td.notCurMon{
 	color: #d3cfd5;
@@ -36,4 +37,105 @@ legend,li,ol,p,pre,td,textarea,th,ul,img{
 	background-color: white;
 	color: #447ff3;
 	font-weight: bold;
+}
+.hide{
+	display: none;
+}
+#skip_shade{
+	position: absolute;
+	top:0;
+	width: 100%;
+	height: 100%;
+	background-color: #2e2e2e;
+	opacity: 0.3;
+	z-index: 5;
+}
+#skip{
+	position: absolute;
+	top:20%;
+	width: 80%;
+	left:10%;
+	background-color: #ffffff;
+	z-index: 100;
+	-webkit-border-radius: 2%;
+}
+#skip .skip_header{
+	text-align: center;
+	font-size: small;
+	color: #989898;
+	margin: 2px;
+	padding: 3px 0;
+	border-bottom: 1px solid lightgray;
+	-webkit-border-radius: 5%;
+	box-shadow: 0 2px 5px #dfdfdf;
+}
+#skip .skip_wrap{
+	position: relative;
+	display: table;
+	border-bottom: 1px solid lightgray;
+	box-shadow: 0 2px 5px #dfdfdf;
+	height: 150px;
+	overflow: hidden;
+	width: 100%;
+}
+#skip .skip_wrap ul{
+	list-style: none;
+	height: 150px;
+	/*overflow: hidden;*/
+}
+
+#skip .skip_wrap .skip_select{
+	background-color: greenyellow;
+	opacity: 0.3;
+	position: absolute;
+	left:0;
+	top:60px;
+	width: 100%;
+	height: 30px;
+	text-align: center;
+}
+#skip .skip_wrap .skip_select .year,#skip .skip_wrap .skip_select .month{
+	position: absolute;
+	top:5px;
+}
+#skip .skip_wrap .skip_select .year{
+	left: 40%;
+}
+#skip .skip_wrap .skip_select .month{
+	right: 10%;
+}
+#skip .skip_wrap #skip_year,#skip .skip_wrap #skip_month{
+	width: 50%;
+	text-align: center;
+	display: table-cell;
+	font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
+	color: #989898;
+	line-height: 30px;
+}
+#skip .skip_wrap #skip_year .selected,#skip .skip_wrap #skip_month .selected{
+	font-size: larger;
+	font-weight: 700;
+}
+#skip .skip_event{
+	width: 100%;
+	display: table;
+	color: #757575;
+}
+#skip .skip_event .skip_cancel,#skip .skip_event .skip_go{
+	width: 50%;
+	line-height: 35px;
+	text-align: center;
+	display: table-cell;
+}
+#skip .skip_event .skip_cancel.yes,#skip .skip_event .skip_go.yes{
+	background-color: #d9ffba;
+}
+#skip .skip_event .skip_cancel.yes{
+	border-bottom-left-radius: 5%;
+}
+#skip .skip_event .skip_go.yes{
+	border-bottom-right-radius: 5%;
+}
+#skip .skip_event .skip_go{
+	border-left: 1px solid lightgray;
 }
