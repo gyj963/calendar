@@ -18,6 +18,9 @@ legend,li,ol,p,pre,td,textarea,th,ul,img{
 	font-size: large;
 	font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
 }
+#calendar>table>caption{
+	line-height: 30px;
+}
 #calendar>table td{
   	height: 44px;
 	width: 14.286%;
