@@ -1,5 +1,13 @@
 Calendar - 一个自制的移动web日历组件
 ==============================
+##  查看效果
+在线预览 ：http://gyj963.github.io/calendar/
+
+
+可使用电脑或移动设备进行查看~
+
+*注意：电脑浏览器查看请启用google的Emulate touch screen*
+
 ##功能介绍
 手机效果截图（Android）：
 
@@ -16,26 +24,6 @@ Calendar - 一个自制的移动web日历组件
 
 
 
-##  查看效果
-下载代码，在此文件夹中命令行输入命令：
-
-*   npm install
-
-来安装必要的module
-
-
-*   node app.js
-
-启动服务器
-
-*   在浏览器中输入 localhost:3000
-
-查看组件效果
-
-可使用电脑或移动设备进行查看~
-
-*   电脑浏览器查看请启用google的Emulate touch screen
-*   移动设备需链接您的电脑
 
 
 ##  组件的使用
