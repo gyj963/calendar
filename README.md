@@ -42,16 +42,12 @@ index.js即使用示例
 ```
 
 
-接下来就可以调用相册组件啦，例如：
+接下来就可以调用日历组件啦，例如：
 ```{bash}
-new PhotoAlbum({
-	               "containerId":"container",   //   相册组件容器的id
-	               "list":photolist,   //   图片路径对象列表
-				   "size":120   //每个正方形缩略图的边长(单位：px)，可省（默认边长：100px）
-               });
 new Calendar({
-	//   日历组件容器的id
+	//   日历组件容器的id	
 	containerId:"container", 
+
 	//   点击一个日期，执行的响应函数，可省
 	selectDate:function(data){
 		var year=data.year;
