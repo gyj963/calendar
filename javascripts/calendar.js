@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by Administrator on 14-7-15.
  */
 function Calendar(opt){
@@ -8,34 +8,6 @@ function Calendar(opt){
 	this.renderDOM();
 	this.bindDOM();
 	this._selectDateEvent&&this.selectDateEvent();
-}
-Calendar.prototype.selectDateEvent=function(){
-	var that=this;
-	$("body").on("tap","td",function(){
-		var curTime=that.createCaption("getCur");
-		var thisDate = parseInt($(this).html());
-		if($(this).hasClass("notCurMon")){
-			if($(this).hasClass("last")){
-				if(curTime.month-1===0){
-					curTime.month=12;
-					curTime.year-=1;
-				}else{
-					curTime.month-=1;
-				}
-
-			}else if($(this).hasClass("next")){
-				if(curTime.month+1===13){
-					curTime.month=1;
-					curTime.year+=1;
-				}else{
-					curTime.month+=1;
-				}
-			}
-		}
-		curTime.date = thisDate;
-		console.log("curTime :",curTime);
-		that._selectDateEvent.call(undefined,curTime);
-	});
 }
 Calendar.prototype.init=function(){
 	this._calendarWrap = document.createElement("div");
@@ -119,89 +91,7 @@ Calendar.prototype.init=function(){
 	fillSkipUl(this.time.month,this._skipMonthUl);
 };
 
-function fillSkipUl(time,obj){
-	obj.innerHTML="";
-	for(var i = time-2;i<=time+2;i++){
-		var skipYearLi=document.createElement("li");
-		skipYearLi.innerHTML=i;
-		obj.appendChild(skipYearLi);
-	}
-	$(obj).children().eq(2).addClass("selected");
-}
 
-function getDaysOfMonth(date){
-	return new Date(date.getFullYear(), (date.getMonth()+1), 0).getDate();
-}
-function generateMonObj(opt){
-	return new Date(opt.month+",1,"+opt.year);
-}
-function getMonAttr(opt){
-//	构造月份的date对象
-	opt.Date=new Date(opt.month+",1,"+opt.year);
-//	月份1号是星期几
-	opt.dayOfMonBegin=opt.Date.getDay();
-//	获取月份有多少天
-	opt.daysOfMon=getDaysOfMonth(opt.Date);
-//	月份最后一天是星期几
-	opt.dayOfMonEnd=new Date(opt.month+","+opt.daysOfMon+","+opt.year);
-}
-
-function getMonthes(){
-	var cur={};     //	这个月
-	var last={};    //	上个月
-	var beforeLast={};
-	var next={};    //	下个月
-
-//	这个月 cur ---- begin
-//	表格头部正显示的年
-	cur.year=document.getElementById("curYear").innerHTML;
-//	表格头部正显示的月
-	cur.month=document.getElementById("curMonth").innerHTML;
-//	获取这个月 各种属性
-	getMonAttr(cur);
-//	这个月 cur ---- end
-
-//  上个月 last ---- begin
-	if(parseInt(cur.month)===1){
-		last.year=parseInt(cur.year)-1;
-		last.month=12;
-	}else{
-		last.year=cur.year;
-		last.month=parseInt(cur.month)-1;
-	}
-//	获取上个月 各种属性
-	getMonAttr(last);
-//  上个月 last ---- end
-
-//	上个月的前一个月 beforeLast ---- begin
-	if(parseInt(last.month)===1){
-		beforeLast.year=parseInt(last.year)-1;
-		beforeLast.month=12;
-	}else{
-		beforeLast.year=last.year;
-		beforeLast.month=parseInt(last.month)-1;
-	}
-	getMonAttr(beforeLast);
-//  上个月的前一个月 beforeLast ---- end
-
-//  下个月 next ---- begin
-	if(parseInt(cur.month)===12){
-		next.year=parseInt(cur.year)+1;
-		next.month=1;
-	}else{
-		next.year=cur.year;
-		next.month=parseInt(cur.month)+1;
-	}
-	getMonAttr(next);
-//  下个月 next ---- end
-
-	return {
-		cur :cur,
-		last :last,
-		beforeLast:beforeLast,
-		next :next
-	}
-}
 //创建每个月的表格内容
 Calendar.prototype.createMonContent=function(opt){
 	var monTbody=document.createElement("tbody");
@@ -282,7 +172,7 @@ Calendar.prototype.createCaption=function(opt){
 			return{
 				year:parseInt(curYear),
 				month:parseInt(curMonth)
-			}
+			};
 		}
 	}else{
 		year=opt.getFullYear();
@@ -362,7 +252,7 @@ Calendar.prototype.bindDOM=function(){
 		$lastMon.show();
 		$lastMon[0].addEventListener("webkitAnimationEnd",function(){
 			$lastMon.removeClass("animated fadeInLeft");
-			$lastMon[0].removeEventListener("webkitAnimationEnd")
+			$lastMon[0].removeEventListener("webkitAnimationEnd");
 		},false);
 		$(".nextMon").remove();
 		$(".curMon").addClass("nextMon").removeClass("curMon");
@@ -383,7 +273,7 @@ Calendar.prototype.bindDOM=function(){
         $nextMon.show();
         $nextMon[0].addEventListener("webkitAnimationEnd",function(){
 	        $nextMon.removeClass("animated fadeInRight");
-	        $nextMon[0].removeEventListener("webkitAnimationEnd")
+	        $nextMon[0].removeEventListener("webkitAnimationEnd");
 	    },false);
 	    $(".lastMon").remove();
 	    $(".curMon").addClass("lastMon").removeClass("curMon");
@@ -494,7 +384,7 @@ Calendar.prototype.bindDOM=function(){
 		var skipObj={
 			year : parseInt($("#skip_year_ul>.selected").html()),
 			month: parseInt($("#skip_month_ul>.selected").html())
-		}
+		};
 		var skipTo=generateMonObj(skipObj);
 		that.createCaption(skipTo);
 		that.monthes=getMonthes();
@@ -515,6 +405,118 @@ Calendar.prototype.bindDOM=function(){
 		fillSkipUl(parseInt(curTime.month),that._skipMonthUl);
 	});
 };
+Calendar.prototype.selectDateEvent=function(){
+	var that=this;
+	$("body").on("tap","tbody.monBlock td",function(){
+		var curTime=that.createCaption("getCur");
+		var thisDate = parseInt($(this).html());
+		if($(this).hasClass("notCurMon")){
+			if($(this).hasClass("last")){
+				if(curTime.month-1===0){
+					curTime.month=12;
+					curTime.year-=1;
+				}else{
+					curTime.month-=1;
+				}
+
+			}else if($(this).hasClass("next")){
+				if(curTime.month+1===13){
+					curTime.month=1;
+					curTime.year+=1;
+				}else{
+					curTime.month+=1;
+				}
+			}
+		}
+		curTime.date = thisDate;
+		console.log("curTime :",curTime);
+		that._selectDateEvent.call(undefined,curTime);
+	});
+};
+
+function fillSkipUl(time,obj){
+	obj.innerHTML="";
+	for(var i = time-2;i<=time+2;i++){
+		var skipYearLi=document.createElement("li");
+		skipYearLi.innerHTML=i;
+		obj.appendChild(skipYearLi);
+	}
+	$(obj).children().eq(2).addClass("selected");
+}
+
+function getDaysOfMonth(date){
+	return new Date(date.getFullYear(), (date.getMonth()+1), 0).getDate();
+}
+function generateMonObj(opt){
+	return new Date(opt.month+",1,"+opt.year);
+}
+function getMonAttr(opt){
+//	构造月份的date对象
+	opt.Date=new Date(opt.month+",1,"+opt.year);
+//	月份1号是星期几
+	opt.dayOfMonBegin=opt.Date.getDay();
+//	获取月份有多少天
+	opt.daysOfMon=getDaysOfMonth(opt.Date);
+//	月份最后一天是星期几
+	opt.dayOfMonEnd=new Date(opt.month+","+opt.daysOfMon+","+opt.year);
+}
+
+function getMonthes(){
+	var cur={};     //	这个月
+	var last={};    //	上个月
+	var beforeLast={};
+	var next={};    //	下个月
+
+//	这个月 cur ---- begin
+//	表格头部正显示的年
+	cur.year=document.getElementById("curYear").innerHTML;
+//	表格头部正显示的月
+	cur.month=document.getElementById("curMonth").innerHTML;
+//	获取这个月 各种属性
+	getMonAttr(cur);
+//	这个月 cur ---- end
+
+//  上个月 last ---- begin
+	if(parseInt(cur.month)===1){
+		last.year=parseInt(cur.year)-1;
+		last.month=12;
+	}else{
+		last.year=cur.year;
+		last.month=parseInt(cur.month)-1;
+	}
+//	获取上个月 各种属性
+	getMonAttr(last);
+//  上个月 last ---- end
+
+//	上个月的前一个月 beforeLast ---- begin
+	if(parseInt(last.month)===1){
+		beforeLast.year=parseInt(last.year)-1;
+		beforeLast.month=12;
+	}else{
+		beforeLast.year=last.year;
+		beforeLast.month=parseInt(last.month)-1;
+	}
+	getMonAttr(beforeLast);
+//  上个月的前一个月 beforeLast ---- end
+
+//  下个月 next ---- begin
+	if(parseInt(cur.month)===12){
+		next.year=parseInt(cur.year)+1;
+		next.month=1;
+	}else{
+		next.year=cur.year;
+		next.month=parseInt(cur.month)+1;
+	}
+	getMonAttr(next);
+//  下个月 next ---- end
+
+	return {
+		cur :cur,
+		last :last,
+		beforeLast:beforeLast,
+		next :next
+	};
+}
 
 function addListener(target, type, handler){
 	if(target.addEventListener){
